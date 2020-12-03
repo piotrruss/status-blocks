@@ -1,0 +1,15 @@
+#!/bin/sh
+case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
+  down)
+    echo "\004  \001"
+  ;;
+  up)
+    ssid="$(iw dev | grep ssid | awk '{print $2}')"
+    percent="$(awk '/^\s*w/ { print int($3 * 100 / 70) }' /proc/net/wireless)"
+    wifiicon=" "
+    [ $percent -le 50 ] && [ $percent -gt 25 ] && color=$(echo '\003') || color=''
+    [ $percent -le 25 ] && color=$(echo '\004')
+    printf "%s%s%s%s\001" "$wifiicon" "$ssid " $color "($percent%)"
+  ;;
+esac
+

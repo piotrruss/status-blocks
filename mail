@@ -1,0 +1,4 @@
+#!/bin/sh
+NEW_MAIL="$(find "$HOME/.local/share/mail/$1/INBOX/new/" -type f 2> /dev/null | wc -l)"
+[ $NEW_MAIL -gt 0 ] && COLOR=$(echo '\003') || COLOR=''
+printf '%s%s%s\001' $COLOR " $2" $NEW_MAIL

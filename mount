@@ -1,0 +1,3 @@
+#!/bin/sh
+MOUNTED="$(ls -m ~/Mounted)"
+[ "$MOUNTED" = "" ] && exit 0 || echo "\003 $MOUNTED\001"

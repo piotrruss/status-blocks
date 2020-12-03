@@ -1,0 +1,3 @@
+#!/usr/bin/sh
+BRIGHTNESS=$(xbacklight -get | awk '{print int($1)}')
+echo "☀ ${BRIGHTNESS}%"

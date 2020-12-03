@@ -1,0 +1,4 @@
+#!/bin/sh
+AVAIL=$(df -h --output=avail '/' | tail -1)
+[ ${AVAIL%?} -le 50 ] && COLOR=$(echo '\004') || COLOR=''
+printf '%s%s%s\001' $COLOR " " $AVAIL

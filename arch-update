@@ -1,0 +1,4 @@
+#!/bin/sh
+UPDATES=$(checkupdates | wc -l)
+[ $UPDATES -ge 100 ] && COLOR=$(echo '\003') || COLOR=''
+printf "%s%s%s\001" $COLOR " " "$UPDATES"

@@ -1,0 +1,8 @@
+#!/bin/sh
+BATTERY="/sys/class/power_supply/BAT0/"
+CAPACITY=$(cat "$BATTERY"/capacity 2>/dev/null) || break
+STATUS=$(sed "s/[Dd]ischarging/ /;s/[Nn]ot charging/ /;s/[Cc]harging/ /;s/[Uu]nknown/ /;s/[Ff]ull/ /" "$BATTERY"/status)
+[ $CAPACITY -le 20 ] && COLOR=$(echo '\004') || COLOR=''
+[ $CAPACITY -gt 20 ] && [ $CAPACITY -le 40 ] && COLOR=$(echo '\003')
+[ $CAPACITY -ge 98 ] && CAPACITY=100
+printf "%s%s%s%%\001" $COLOR "$STATUS" "$CAPACITY"

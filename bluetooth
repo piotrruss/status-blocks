@@ -1,0 +1,5 @@
+#!/bin/sh
+STATUS=$(systemctl is-active bluetooth)
+[ "$STATUS" != "active" ] && exit
+HEADPHONES=$(bluetoothctl info 38:18:4C:59:C1:B0 | grep "Connected: yes")
+if [ "$HEADPHONES" ]; then echo "\003\001"; else echo "\003\001"; fi;
